@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<head>
+
+    <meta charset="utf-8" />
+
+    <title>Page Génération HTML</title>
+    <meta name="description" content="Description de la page">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+    <script src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+
+function showPopup() {
+     $("#customPopup").before('<div id="grayBack"></div>');
+     var popupH = $("#customPopup").height();
+     var popupW = $("#customPopup").width();
+     $("#grayBack").css('opacity', 0).fadeTo(300, 0.5, function () { $("#customPopup").fadeIn(500); });
+}
+
+function hidePopup() {
+     $("#grayBack").fadeOut('fast', function () { $(this).remove() });
+     $("#customPopup").fadeOut('fast', function () { $(this).hide() });
+}
+
+    	$(document).ready(function(){
+        var phrasevide=true;
+        $("#newbutton").click(function(e){
+          e.preventDefault();
+          if(phrasevide){
+            $("#recipient").empty();
+            phrasevide=false;
+          }
+          if($('#type').val()=="h1"){
+
+            var contenu=$('#contenu').val();
+
+            if($('#ajoutAvant').is(":checked")){
+
+            $("#recipient").prepend('<h1>'+contenu+'</h1>');
+
+          }
+          else{
+
+            $("#recipient").append('<h1>'+contenu+'</h1>');
+
+          }
+
+          }
+          if($('#type').val()=="h2"){
+
+            var contenu=$('#contenu').val();
+
+            if($('#ajoutAvant').is(":checked")){
+
+            $("#recipient").prepend('<h2>'+contenu+'</h2>');
+
+          }
+            else{
+
+            $("#recipient").append('<h2>'+contenu+'</h2>');
+
+          }
+          }if($('#type').val()=="h3"){
+
+            var contenu=$('#contenu').val();
+
+            if($('#ajoutAvant').is(":checked")){
+
+            $("#recipient").prepend('<h3>'+contenu+'</h3>');
+          }
+          else{
+
+            $("#recipient").append('<h3>'+contenu+'</h3>');
+
+          }
+
+          }
+          if($('#type').val()=="p"){
+
+            var contenu=$('#contenu').val();
+
+            if($('#ajoutAvant').is(":checked")){
+
+            $("#recipient").prepend('<p>'+contenu+'</p>');
+
+          }
+          else{
+
+            $("#recipient").append('<p>'+contenu+'</p>');
+
+          }
+
+          }
+          if($('#type').val()=="img"){
+
+          if($('#ajoutAvant').is(":checked")){
+            /*$("#recipient").prepend()*/
+          }
+            else{
+            /*$("#recipient").append()*/
+
+          }
+
+          }
+          if($('#type').val()=="a"){
+
+            var contenu=$('#contenu').val();
+
+            if($('#ajoutAvant').is(":checked")){
+
+            $("#recipient").prepend('<a href='+contenu+'/>');
+
+          }
+            else{
+            $("#recipient").append('<a href='+contenu+'/>');
+
+          }
+          }
+          if($('#type').val()=="input:text"){
+
+            var contenu=$('#contenu').val();
+
+            if($('#ajoutAvant').is(":checked")){
+
+              $("#recipient").prepend('<input type=text placeholder='+contenu+'/>');
+
+            }
+            else{
+
+            $("#recipient").append('<input type=text placeholder='+contenu+'/>');
+
+          }
+
+          }
+          if($('#type').val()=="input:submit"){
+
+            var contenu=$('#contenu').val();
+
+            if($('#ajoutAvant').is(":checked")){
+
+              $("#recipient").prepend('<input type=submit value='+contenu+' />');
+
+            }
+
+            else{
+
+            $("#recipient").append('<input type=submit value='+contenu+' />');
+
+            }
+
+          }
+          if($('#type').val()=="label"){
+
+            var contenu=$('#contenu').val();
+
+            if($('#ajoutAvant').is(":checked")){
+
+            $("#recipient").prepend('<label>'+contenu+'</label>');
+
+          }
+
+          else{
+
+            $("#recipient").append('<label>'+contenu+'</label>');
+
+          }
+
+          }
+
+        });
+
+        $("#voidbutton").click(function(){
+
+          $("#recipient").html("La page est vide pour l'instant...");
+          phrasevide = true;
+
+        });
+
+        $("#htmlbutton").click(function(){
+
+          var contenuhtml = '<html lang="en"><head><meta charset="utf-8"><title>Page générée</title></head><body>' + $("#recipient").html() +'</body></html>';
+
+          document.getElementById("Genhtml").innerHTML = contenuhtml;
+
+          showPopup();
+        });
+    	});
+   	</script>
+</head>
+<body>
+	<div id="generateur">
+		<form action="#">
+			<label for="type">Type d'élément</label>
+			<br />
+			<select name="type" id="type">
+				<option value="h1">Titre (h1)</option>
+				<option value="h2">Titre (h2)</option>
+				<option value="h3">Titre (h3)</option>
+				<option value="p">Paragraphe (p)</option>
+				<option value="img">Image (img)</option>
+				<option value="a">Lien (a))</option>
+				<option value="input:text">Champ de texte (input:text)</option>
+				<option value="input:submit">Bouton (input:submit)</option>
+				<option value="label">Label (label)</option>
+			</select>
+			<br />
+			<label for="contenu">Contenu de l'élément</label><br />
+			<input type="text" placeholder="Contenu" id="contenu" name="contenu" />
+			<br />
+			<label for="ajoutAvant">Ajouter avant</label>
+			<input type="checkbox" name="ajoutAvant" id="ajoutAvant" />
+			<br />
+			<input id="newbutton" type="submit" value="Ajouter" />
+			<input id="voidbutton" type="button" value="Réinitialiser" />
+			<input id="htmlbutton" type="button" value="Générer" />
+		</form>
+	</div>
+
+	<div id="recipient">La page est vide pour l'instant...</div>
+
+  <div id="customPopup">
+     <h3>Generation</h3>
+     <textarea id="Genhtml"></textarea>
+     <input type="button" value="Ok" onclick="hidePopup();">
+  </div>
+
+</body>
+	<style>
+		body{
+			font-family: 'Quicksand', sans-serif;
+			background-color: #FCFCFC;
+		}
+
+		#generateur{
+			float: right;
+			border: 1px solid #C1C2CC;
+			padding: 15px;
+			border-radius: 3px;
+			background: #F1F1F1;
+		}
+
+		#generateur label{ font-weight: bold;}
+		#generateur select{ margin-bottom: 10px; width: 200px; border: 1px solid #666; }
+		#generateur input[type=text]{ margin-bottom: 10px; width: 188px; border: 1px solid #666; padding: 5px; border-radius: 3px;}
+		#generateur input[type=checkbox]{ margin-bottom: 10px; }
+
+		#generateur input[type=submit]{ background-color: #83D833; }
+		#generateur input[type=button]{ background-color: #E80612; }
+		#generateur input[type=button]:last-child{ background-color: #FCC325; }
+		#generateur input[type=submit],
+		#generateur input[type=button]{ color: white; border-radius: 3px; border: none; padding: 9px;}
+		#generateur input[type=submit]:hover,
+		#generateur input[type=button]:hover{ opacity: 0.7; cursor: pointer;}
+
+		#recipient{
+			margin-right: 250px;
+			padding: 15px;
+			border-radius: 3px;
+			border: 1px solid #C1C2CC;
+		}
+
+
+    #grayBack
+{
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: black;
+     z-index: 1999;
+     opacity: 0.5;
+}
+
+#customPopup
+{
+     position: fixed;
+     display: none;
+     left: 33%;
+     top: 33%;
+     z-index: 2000;
+     padding: 20px;
+     width: 33%;
+     background-color: #EEEEEE;
+     font-size: 12px;
+     line-height: 16px;
+     color: #202020;
+     border : 3px outset #555555;
+}
+
+#Genhtml
+{
+  width: 100%;
+  height: 200px;
+}
+</style>
+</html>
