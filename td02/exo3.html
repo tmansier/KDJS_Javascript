@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Exo3</title>
+  </head>
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+  <style>
+    body{ font-family: 'Quicksand', sans-serif; }
+  </style>
+
+  <script src="jquery-3.2.1.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+
+      $.ajax({
+
+      url: "http://www.labri.fr/perso/pbiasutt/KDJS/TD02/functions.php",
+      dataType: "script",
+      beforeSend: function(){ console.log("Envoi de la requête ..."); },
+      error: function(){ console.log("Loupé"); },
+      complete: function(data){
+      console.log("Réponse recue");
+      console.log(data);
+      $("form").submit(function() {
+        if (isPrime($("input[name=nombre]").val()))
+        {
+          $("div#response").text("Premier");
+        }
+        else
+        {
+          $("div#response").text("Pas premier");
+        }
+        return false;
+      });
+      },
+      method: "GET"
+      });
+     });
+
+
+
+
+
+
+  </script>
+  <body>
+    <form>
+      <input id="nb1" type="number" name="nombre" value="0">
+      <input id="send1" type="submit">
+    </form>
+    <div id="response"></div>
+
+  </body>
+</html>

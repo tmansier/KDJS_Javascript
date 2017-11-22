@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Draggable</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" charset="utf-8"></script>
+    <style>
+      #zone { width: 40%; border-style: dashed; border-width: 5px; border-color: black;  padding: 20px; }
+      #draggable { background: red; padding: 20px; width: 40%}
+      #list { margin-top: 20px; }
+      #sortable { list-style-type: none; margin: 5px; padding: 0; }
+      #sortable li { margin: 5px; padding: 5px; width: 60px; height: 18px; border: solid; border-width: 1px;
+}
+
+    </style>
+    <script>
+      $(function(){
+
+        $('#draggable').draggable({
+          drag: function(){
+            var positionX = $('#draggable').css("left");
+            var positionY = $('#draggable').css("top");
+            $('#zone').empty();
+            $('#zone').append('<p>Position : ( ' + positionX + ' , ' + positionY + ' )</p>');
+          }
+        });
+
+        $('#sortable').sortable();
+        $('#sortable').disableSelection();
+      });
+
+    </script>
+
+  </head>
+  <body>
+    <div id="zone"></div>
+    <div id="draggable">Bonjour je suis draggable</div>
+    <div id="list">
+      Je suis une liste que l'on peut trier
+      <ul id="sortable">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+        <li>Item 6</li>
+        <li>Item 7</li>
+      </ul>
+    </div>
+
+  </body>
+</html>
